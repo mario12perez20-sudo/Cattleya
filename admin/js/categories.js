@@ -12,7 +12,7 @@ const catForm = () => document.getElementById("category-form");
 const catalogSelect = () => document.getElementById("catalog-select");
 
 function currentCatalogId() {
-  return catalogSelect()?.value || "plantas";
+  return catalogSelect()?.value || "brunch";
 }
 
 async function renderCategoriesTable() {

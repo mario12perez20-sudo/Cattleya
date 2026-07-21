@@ -12,7 +12,7 @@ const categorySelectInForm = () => document.getElementById("product-category-sel
 const prodCatalogSelect = () => document.getElementById("catalog-select");
 
 function prodCurrentCatalogId() {
-  return prodCatalogSelect()?.value || "plantas";
+  return prodCatalogSelect()?.value || "brunch";
 }
 
 function formatCOPAdmin(value) {
