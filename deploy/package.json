@@ -6,7 +6,9 @@
   "main": "deploy.js",
   "scripts": {
     "deploy": "node deploy.js",
-    "deploy:dry": "node deploy.js --dry"
+    "deploy:dry": "node deploy.js --dry",
+    "push": "node deploy-github.js",
+    "push:dry": "node deploy-github.js --dry"
   },
   "dependencies": {
     "basic-ftp": "^5.0.5",
