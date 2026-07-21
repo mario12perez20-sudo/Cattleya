@@ -1,0 +1,44 @@
+/* =========================================================
+   Cattleya — Home
+   ========================================================= */
+
+.two-up {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 760px) {
+  .two-up { grid-template-columns: 1fr; }
+}
+
+.feature-card {
+  display: block;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.feature-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.feature-card__body {
+  padding: var(--space-md);
+}
+
+.feature-card__cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--color-magenta);
+}

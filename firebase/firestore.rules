@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Esquema "documento único": catalog/brunch y catalog/plantas contienen
+    // todas las secciones y productos anidados. Lectura pública, escritura
+    // solo para administradores autorizados (ver /admins más abajo).
+    match /catalog/{catalogId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Configuración del sitio (whatsapp, horario, etc.)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Lista de administradores: cada usuario solo puede leer SU PROPIO
+    // documento (para que el panel confirme "¿soy admin?" al iniciar
+    // sesión) — no puede leer el de nadie más ni listar la colección.
+    // Nunca escribible desde el cliente: se gestiona desde la consola de
+    // Firebase o un script administrativo con la Admin SDK.
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}

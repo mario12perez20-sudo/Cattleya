@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel — Cattleya</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/logo/favicon.svg">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="brand">
+        <img src="../assets/logo/cattleya-orchid-icon.svg" alt="" class="brand__icon">
+        <span class="brand__name">Cattleya</span>
+      </div>
+      <div class="form-field" style="margin-top: var(--space-md);">
+        <label style="color: var(--color-cream);">Catálogo</label>
+        <select id="catalog-select">
+          <option value="plantas">Plantas &amp; Orquídeas</option>
+          <option value="brunch">Brunch</option>
+        </select>
+      </div>
+      <nav class="admin-nav">
+        <button type="button" class="tab-btn is-active" data-tab="productos">Productos</button>
+        <button type="button" class="tab-btn" data-tab="categorias">Categorías</button>
+        <a href="../index.html" target="_blank" style="color: var(--color-cream); opacity: 0.7; font-size: 0.85rem; margin-top: var(--space-md); padding: 0 0.75rem;">Ver sitio ↗</a>
+      </nav>
+      <button id="logout-btn" class="logout-btn">Cerrar sesión</button>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ===== Vista: Productos ===== -->
+      <section id="view-productos" class="admin-view">
+        <div class="admin-topbar">
+          <h1 style="margin:0;">Productos</h1>
+          <button id="add-product-btn" class="btn btn-primary btn-sm">+ Nuevo producto</button>
+        </div>
+        <div class="admin-filters">
+          <select id="product-category-filter">
+            <option value="all">Todas las categorías</option>
+          </select>
+        </div>
+        <div class="admin-table-wrap">
+          <div class="adm-list" id="products-table-body"></div>
+        </div>
+      </section>
+
+      <!-- ===== Vista: Categorías ===== -->
+      <section id="view-categorias" class="admin-view" style="display:none;">
+        <div class="admin-topbar">
+          <h1 style="margin:0;">Categorías</h1>
+          <button id="add-category-btn" class="btn btn-primary btn-sm">+ Nueva categoría</button>
+        </div>
+        <div class="admin-table-wrap">
+          <div class="adm-list" id="categories-table-body"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== Modal: Producto ===== -->
+  <div id="product-modal" class="modal-overlay is-hidden">
+    <div class="modal-card">
+      <h2 id="product-modal-title">Nuevo producto</h2>
+      <form id="product-form">
+        <div class="form-grid">
+          <div class="form-field full">
+            <label>Nombre</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-field full">
+            <label>Descripción</label>
+            <textarea name="description"></textarea>
+          </div>
+          <div class="form-field">
+            <label>Precio (COP)</label>
+            <input type="number" name="price" min="0" step="500" required>
+          </div>
+          <div class="form-field">
+            <label>Categoría</label>
+            <select name="categoryId" id="product-category-select" required>
+              <option value="" disabled selected>Selecciona una categoría</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Stock</label>
+            <select name="stock">
+              <option value="disponible">Disponible</option>
+              <option value="agotado">Agotado</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Orden</label>
+            <input type="number" name="order" min="0" step="1">
+          </div>
+          <div class="form-field full">
+            <label>Imágenes (URLs)</label>
+            <div id="image-url-list" class="image-url-list"></div>
+            <button type="button" id="add-image-row-btn" class="btn btn-outline btn-sm" style="margin-top:0.5rem;">+ Agregar imagen</button>
+          </div>
+          <div class="form-field checkbox-row">
+            <input type="checkbox" name="active" id="product-active">
+            <label for="product-active" style="margin:0;">Activo (visible en el sitio)</label>
+          </div>
+          <div class="form-field checkbox-row">
+            <input type="checkbox" name="featured" id="product-featured">
+            <label for="product-featured" style="margin:0;">Destacado</label>
+          </div>
+        </div>
+
+        <fieldset class="promo-fieldset">
+          <legend>Promoción</legend>
+          <div class="form-grid">
+            <div class="form-field checkbox-row full">
+              <input type="checkbox" name="promoActive" id="promo-active">
+              <label for="promo-active" style="margin:0;">Promoción activa</label>
+            </div>
+            <div class="form-field full">
+              <label>Etiqueta (ej. "-20%", "2x1")</label>
+              <input type="text" name="promoLabel">
+            </div>
+            <div class="form-field">
+              <label>Tipo de descuento</label>
+              <select name="promoDiscountType">
+                <option value="percent">Porcentaje (%)</option>
+                <option value="fixed">Valor fijo (COP)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Valor del descuento</label>
+              <input type="number" name="promoDiscountValue" min="0" step="1">
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="modal-actions">
+          <button type="button" id="product-modal-cancel" class="btn btn-outline btn-sm">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Categoría ===== -->
+  <div id="category-modal" class="modal-overlay is-hidden">
+    <div class="modal-card">
+      <h2 id="category-modal-title">Nueva categoría</h2>
+      <form id="category-form">
+        <div class="form-grid">
+          <div class="form-field full">
+            <label>Nombre</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-field full">
+            <label>Subtítulo (opcional)</label>
+            <input type="text" name="subtitle" placeholder='ej. "de sal para deleitarse"'>
+          </div>
+          <div class="form-field">
+            <label>Orden</label>
+            <input type="number" name="order" min="0" step="1">
+          </div>
+          <div class="form-field checkbox-row full">
+            <input type="checkbox" name="active" id="category-active">
+            <label for="category-active" style="margin:0;">Activa (visible en el sitio)</label>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="category-modal-cancel" class="btn btn-outline btn-sm">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-init.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/catalog-store.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    guardDashboard(() => {
+      initProductsView();
+      initCategoriesView();
+
+      document.getElementById("catalog-select")?.addEventListener("change", () => {
+        renderProductsTable();
+        renderCategoriesTable();
+      });
+
+      const tabButtons = document.querySelectorAll(".tab-btn");
+      const views = {
+        productos: document.getElementById("view-productos"),
+        categorias: document.getElementById("view-categorias"),
+      };
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach((b) => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          Object.entries(views).forEach(([key, el]) => {
+            el.style.display = key === btn.dataset.tab ? "block" : "none";
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

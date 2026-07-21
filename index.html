@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cattleya — Plantas, orquídeas y brunch en Palmira</title>
+  <meta name="description" content="Cattleya: plantas y orquídeas con alma, y un brunch para deleitarte. Palmira, Valle del Cauca.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo/cattleya-orchid-icon.svg" alt="" class="brand__icon">
+        <span class="brand__name">Cattleya</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html" class="is-active">Inicio</a></li>
+          <li><a href="plantas.html">Plantas &amp; Orquídeas</a></li>
+          <li><a href="brunch.html">Brunch</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <div>
+          <span class="hero__eyebrow">Bienvenido a</span>
+          <h1 class="hero__title">Cattleya</h1>
+          <p>Un rincón en Palmira donde las plantas y orquídeas conviven con un brunch hecho con cariño. Ven a elegir tu próxima planta o a deleitarte con nuestra carta.</p>
+          <div class="hero__actions">
+            <a href="plantas.html" class="btn btn-primary">Ver plantas &amp; orquídeas</a>
+            <a href="brunch.html" class="btn btn-outline">Ver carta de brunch</a>
+          </div>
+        </div>
+        <div class="hero__image">
+          <img src="assets/img/brunch/web/jardin-morita.jpg" alt="Jardín de Morita, uno de los platos de la carta de brunch de Cattleya">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">Dos mundos</span>
+          <h2>Todo Cattleya en un solo lugar</h2>
+        </div>
+        <div class="two-up">
+          <a class="feature-card" href="plantas.html">
+            <img src="assets/img/plantas/placeholder.svg" alt="">
+            <div class="feature-card__body">
+              <h3>Plantas &amp; Orquídeas</h3>
+              <p>Nuestra selección de plantas de interior, exterior, suculentas y orquídeas — la insignia de la casa.</p>
+              <span class="feature-card__cta">Ver catálogo →</span>
+            </div>
+          </a>
+          <a class="feature-card" href="brunch.html">
+            <img src="assets/img/brunch/web/espejo-cherry.jpg" alt="">
+            <div class="feature-card__body">
+              <h3>Brunch</h3>
+              <p>Platos de sal y dulce, café y bebidas — para acompañar tu visita entre plantas.</p>
+              <span class="feature-card__cta">Ver carta →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 0.75rem;">
+          <img src="assets/logo/cattleya-orchid-icon.svg" alt="" class="brand__icon">
+          <span class="brand__name" style="color: var(--color-cream);">Cattleya</span>
+        </div>
+        <p>Plantas, orquídeas y brunch en Palmira, Valle del Cauca.</p>
+      </div>
+      <div>
+        <h4>Explora</h4>
+        <ul>
+          <li><a href="plantas.html">Plantas &amp; Orquídeas</a></li>
+          <li><a href="brunch.html">Brunch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Palmira, Valle del Cauca</li>
+          <li id="footer-hours">Mar - Dom: 8:00 a.m. - 4:00 p.m.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span data-current-year></span> Cattleya. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <a href="#" id="whatsapp-float" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.75 1.2h.01c5.46 0 9.91-4.45 9.91-9.9C21.96 6.45 17.51 2 12.04 2zm5.79 14.11c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.64.77 1.92.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script>
+    (async () => {
+      try {
+        const snap = await window.CATTLEYA_DB.collection("settings").doc("site").get();
+        if (snap.exists) {
+          const data = snap.data();
+          const waBtn = document.getElementById("whatsapp-float");
+          if (waBtn && data.whatsappNumber) {
+            waBtn.href = buildGeneralInquiryLink(data.whatsappNumber);
+          }
+          const hoursEl = document.getElementById("footer-hours");
+          if (hoursEl && data.hours) hoursEl.textContent = data.hours;
+        }
+      } catch (err) {
+        console.error("No se pudo cargar settings/site:", err);
+      }
+    })();
+  </script>
+</body>
+</html>

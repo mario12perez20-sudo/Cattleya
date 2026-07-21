@@ -1,0 +1,57 @@
+/* =========================================================
+   Cattleya — Variables de diseño
+   Paleta muestreada directamente de las piezas reales del
+   menú (Menú/*.jpeg). Si Ángeles trae un manual de marca
+   formal, estos valores son el primer lugar a actualizar.
+   ========================================================= */
+
+:root {
+  /* --- Color --- */
+  --color-cream: #FEF9E6;       /* fondo principal, papel */
+  --color-cream-soft: #FBF3DC;  /* fondo alterno / tarjetas */
+  --color-magenta: #D1347B;     /* acento principal: títulos, precios, CTA */
+  --color-magenta-dark: #B22868;
+  --color-wine: #5C132D;        /* línea de ilustración, wordmark, texto fuerte */
+  --color-wine-soft: #7A2C45;
+  --color-text: #4A4638;        /* texto de párrafo, oscurecido para accesibilidad AA sobre crema */
+  --color-text-muted: #8A8371;
+  --color-white: #FFFFFF;
+  --color-success: #3E7A4E;     /* disponible / activo */
+  --color-danger: #B23A2E;      /* agotado / inactivo */
+  --color-border: #E8DCC0;
+
+  /* --- Tipografía ---
+     Serif elegante para títulos grandes (Menú, Bebidas) y
+     script/cursiva para nombres de plato y acentos de marca,
+     aproximando la identidad ya usada por Cattleya. */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-script: 'Dancing Script', 'Brush Script MT', cursive;
+  --font-body: 'Poppins', 'Segoe UI', sans-serif;
+
+  /* --- Tamaños --- */
+  --fs-hero: clamp(2.6rem, 6vw, 4.5rem);
+  --fs-h1: clamp(2rem, 4vw, 3rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.1rem);
+  --fs-h3: clamp(1.15rem, 2vw, 1.4rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-price: 1.05rem;
+
+  /* --- Espaciado --- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+
+  /* --- Bordes / sombras --- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --shadow-card: 0 8px 24px rgba(92, 19, 45, 0.08);
+  --shadow-card-hover: 0 14px 32px rgba(92, 19, 45, 0.14);
+
+  /* --- Layout --- */
+  --max-width: 1180px;
+  --header-height: 76px;
+}

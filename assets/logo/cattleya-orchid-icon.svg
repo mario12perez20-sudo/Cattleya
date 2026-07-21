@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="Ícono orquídea Cattleya">
+  <!-- Placeholder de ícono de orquídea de línea, en el espíritu del logo actual de Cattleya. -->
+  <!-- Reemplazar por el archivo de logo oficial cuando Ángeles lo suministre. -->
+  <g stroke="var(--color-magenta, #D1347B)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- pétalo superior -->
+    <path d="M60 18 C48 26 46 40 60 48 C74 40 72 26 60 18 Z"/>
+    <!-- pétalos laterales -->
+    <path d="M60 48 C42 40 26 44 22 58 C34 66 50 62 60 48 Z"/>
+    <path d="M60 48 C78 40 94 44 98 58 C86 66 70 62 60 48 Z"/>
+    <!-- sépalos inferiores -->
+    <path d="M60 48 C50 60 48 76 58 90 C64 82 66 70 60 48 Z"/>
+    <path d="M60 48 C70 60 72 76 62 90 C56 82 54 70 60 48 Z"/>
+    <!-- labelo central -->
+    <path d="M60 48 C54 54 54 62 60 68 C66 62 66 54 60 48 Z" stroke-width="1.8"/>
+    <circle cx="60" cy="50" r="2.4" fill="var(--color-magenta, #D1347B)" stroke="none"/>
+  </g>
+</svg>

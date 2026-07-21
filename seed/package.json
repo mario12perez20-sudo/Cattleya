@@ -1,0 +1,13 @@
+{
+  "name": "cattleya-seed",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Script de carga de datos semilla a Firestore para Cattleya",
+  "main": "seed.js",
+  "scripts": {
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

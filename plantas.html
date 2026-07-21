@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantas &amp; Orquídeas — Cattleya</title>
+  <meta name="description" content="Catálogo de plantas y orquídeas de Cattleya, Palmira. Consulta disponibilidad y pide por WhatsApp.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo/cattleya-orchid-icon.svg" alt="" class="brand__icon">
+        <span class="brand__name">Cattleya</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="plantas.html" class="is-active">Plantas &amp; Orquídeas</a></li>
+          <li><a href="brunch.html">Brunch</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-bottom: 1rem;">
+      <div class="container text-center">
+        <span class="hero__eyebrow">Nuestro catálogo</span>
+        <h1 class="hero__title" style="font-size: var(--fs-h1);">Plantas &amp; Orquídeas</h1>
+        <p style="max-width: 620px; margin: 0 auto var(--space-md);">
+          Elige tu favorita y escríbenos por WhatsApp para confirmar disponibilidad y coordinar la entrega.
+        </p>
+        <a id="plantas-wa-general" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp">
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: var(--space-md);">
+      <div class="container">
+        <div id="plantas-filters" class="category-filters"></div>
+        <div id="plantas-grid" class="product-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 0.75rem;">
+          <img src="assets/logo/cattleya-orchid-icon.svg" alt="" class="brand__icon">
+          <span class="brand__name" style="color: var(--color-cream);">Cattleya</span>
+        </div>
+        <p>Plantas, orquídeas y brunch en Palmira, Valle del Cauca.</p>
+      </div>
+      <div>
+        <h4>Explora</h4>
+        <ul>
+          <li><a href="plantas.html">Plantas &amp; Orquídeas</a></li>
+          <li><a href="brunch.html">Brunch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Palmira, Valle del Cauca</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span data-current-year></span> Cattleya. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/catalog-plantas.js"></script>
+</body>
+</html>
