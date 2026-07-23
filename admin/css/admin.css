@@ -63,7 +63,7 @@ body.admin-body {
   color: var(--color-wine);
 }
 
-.form-field input,
+.form-field input:not([type="checkbox"]),
 .form-field select,
 .form-field textarea {
   width: 100%;
@@ -316,6 +316,14 @@ body.admin-body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  accent-color: var(--color-magenta);
+  cursor: pointer;
 }
 
 fieldset.promo-fieldset {
