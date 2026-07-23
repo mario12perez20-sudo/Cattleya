@@ -38,6 +38,15 @@
   letter-spacing: 0.02em;
 }
 
+/* Logo real (ícono + "Cattleya" en un solo PNG con transparencia).
+   Dos versiones: color (fondos claros, ej. el header) y blanca (fondos
+   oscuros, ej. el footer) — ver assets/logo/. */
+.brand-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
 .main-nav ul {
   display: flex;
   gap: var(--space-md);

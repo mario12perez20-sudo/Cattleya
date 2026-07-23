@@ -29,6 +29,16 @@ body.admin-body {
   font-size: 1.35rem;
 }
 
+/* Logo real (ícono + "Cattleya" en un solo PNG con transparencia) —
+   ver assets/logo/. Blanco para la sidebar (fondo vino), color para la
+   tarjeta de login (fondo blanco). */
+.brand-logo {
+  display: block;
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
 /* --- Login --- */
 .login-screen {
   min-height: 100vh;
@@ -48,7 +58,7 @@ body.admin-body {
   text-align: center;
 }
 
-.login-card img { width: 56px; margin: 0 auto var(--space-sm); }
+.login-card .brand-logo { margin: 0 auto var(--space-sm); }
 
 .form-field {
   text-align: left;

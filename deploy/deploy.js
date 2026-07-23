@@ -33,6 +33,7 @@ const EXCLUDE = [
   "node_modules",
   "Menú",
   "Productos",
+  "IMG",
   ".DS_Store",
 ];
 
