@@ -114,6 +114,10 @@
   .hero__inner { grid-template-columns: 1fr; text-align: center; }
 }
 
+@media (max-width: 640px) {
+  .hero { padding: var(--space-lg) 0; }
+}
+
 .hero__eyebrow {
   font-family: var(--font-script);
   font-size: 1.8rem;
