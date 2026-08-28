@@ -20,8 +20,8 @@ const brunchCatalog = {
   sections: [
     {
       id: "brunch-sal",
-      name: "Para el hambre",
-      subtitle: "de sal para deleitarse",
+      name: "de un brunch que enamora",
+      subtitle: "De sal, para deleitarte sin apuro",
       active: true,
       order: 1,
       items: [
@@ -84,8 +84,8 @@ const brunchCatalog = {
     },
     {
       id: "brunch-dulce",
-      name: "Para el antojo",
-      subtitle: "dulce para disfrutar",
+      name: "de un antojo imperdible",
+      subtitle: "Dulce para disfrutar",
       active: true,
       order: 2,
       items: [

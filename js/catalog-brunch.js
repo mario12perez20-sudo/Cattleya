@@ -51,7 +51,7 @@
     return `
       <article class="product-card">
         <div class="product-card__media">
-          <img src="${img}" alt="${item.name}" loading="lazy">
+          ${img ? `<img src="${img}" alt="${item.name}" loading="lazy">` : ""}
         </div>
         <div class="product-card__body">
           <h3 class="product-card__title">${item.name}</h3>
