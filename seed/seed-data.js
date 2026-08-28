@@ -164,11 +164,11 @@ const brunchCatalog = {
       active: true,
       order: 3,
       items: [
-        { id: "add-panceta", name: "Panceta", description: "", price: 5000, images: [], active: true, order: 1, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
-        { id: "add-tocineta", name: "Tocineta", description: "", price: 7000, images: [], active: true, order: 2, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
-        { id: "add-pan-brioche-parmesano", name: "Pan brioche con parmesano", description: "", price: 8000, images: [], active: true, order: 3, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
-        { id: "add-queso-parmesano", name: "Queso parmesano", description: "", price: 3500, images: [], active: true, order: 4, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
-        { id: "add-salsa-aderezzi", name: "Salsa Aderezzi", description: "", price: 2500, images: [], active: true, order: 5, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "add-panceta", name: "Panceta", description: "", price: 5000, images: ["assets/img/brunch/icons/panceta.png"], active: true, order: 1, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "add-tocineta", name: "Tocineta", description: "", price: 7000, images: ["assets/img/brunch/icons/tocineta.png"], active: true, order: 2, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "add-pan-brioche-parmesano", name: "Pan brioche con parmesano", description: "", price: 8000, images: ["assets/img/brunch/icons/pan-brioche-parmesano.png"], active: true, order: 3, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "add-queso-parmesano", name: "Queso parmesano", description: "", price: 3500, images: ["assets/img/brunch/icons/queso-parmesano.png"], active: true, order: 4, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "add-salsa-aderezzi", name: "Salsa Aderezzi", description: "", price: 2500, images: ["assets/img/brunch/icons/salsa-aderezzi.png"], active: true, order: 5, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
       ],
     },
     {
