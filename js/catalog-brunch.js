@@ -72,7 +72,12 @@
     if (items.length === 0) return "";
 
     const hasSubgroups = items.some((item) => item.subgroup);
-    const hasPhotos = items.some((item) => item.images && item.images.length);
+    // Solo cuenta como "tiene foto" (layout de tarjeta grande) si es una foto
+    // real del plato (assets/img/brunch/web/...). Los íconos de Adiciones
+    // (assets/img/brunch/icons/...) NO deben activar el layout de tarjeta —
+    // son miniaturas para la lista compacta, no fotos de producto.
+    const isDishPhoto = (url) => typeof url === "string" && url.includes("/web/");
+    const hasPhotos = items.some((item) => (item.images || []).some(isDishPhoto));
 
     let body;
     if (hasSubgroups) {
