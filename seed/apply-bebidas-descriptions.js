@@ -55,6 +55,7 @@ const DESCRIPTIONS = {
 // desactivar el otro sin borrarlo.
 const RENAMES = {
   "beb-agua-con-gas": "Botella de agua",
+  "beb-americano": "Americano / Tinto",
 };
 const DEACTIVATE = ["beb-agua-sin-gas"];
 

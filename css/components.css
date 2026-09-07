@@ -283,7 +283,7 @@
 /* --- Sección de menú tipo "carta" (brunch) --- */
 .menu-list {
   display: grid;
-  gap: var(--space-md);
+  gap: 0;
 }
 
 .menu-item {
