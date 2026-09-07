@@ -64,6 +64,14 @@
     `;
   }
 
+  // Subgrupos de Bebidas que se muestran como tarjeta de producto (foto
+  // arriba, info abajo, grilla de a 2 en mobile) en vez de lista compacta
+  // con ícono chico. Decisión de Mario (2026-09-07): Café/chocolate y Sodas
+  // en tarjeta; Infusiones y Agua se quedan como lista compacta (como
+  // Adiciones). No hay campo para esto en Firestore — es una convención de
+  // nombre de subgrupo definida acá; si cambia el criterio, ajustar este set.
+  const CARD_SUBGROUPS = new Set(["A base de café y chocolate", "Sodas"]);
+
   function renderSection(section) {
     const items = (section.items || [])
       .filter((item) => item.active !== false)
@@ -81,7 +89,8 @@
 
     let body;
     if (hasSubgroups) {
-      // Bebidas y similares: siempre en lista compacta agrupada, tengan o no foto.
+      // Bebidas: por subgrupo, tarjeta de producto (CARD_SUBGROUPS) o lista
+      // compacta con ícono (el resto) — ver comentario de CARD_SUBGROUPS arriba.
       const groups = {};
       items.forEach((item) => {
         const key = item.subgroup || "Otros";
@@ -89,12 +98,15 @@
         groups[key].push(item);
       });
       body = Object.entries(groups)
-        .map(
-          ([groupName, groupItems]) => `
+        .map(([groupName, groupItems]) => {
+          const list = CARD_SUBGROUPS.has(groupName)
+            ? `<div class="product-grid product-grid--compact">${groupItems.map(renderProductCard).join("")}</div>`
+            : `<div class="menu-list">${groupItems.map(renderMenuItem).join("")}</div>`;
+          return `
             <h4 class="menu-subgroup-title">${groupName}</h4>
-            <div class="menu-list">${groupItems.map(renderMenuItem).join("")}</div>
-          `
-        )
+            ${list}
+          `;
+        })
         .join("");
     } else if (hasPhotos) {
       // Platos con foto (sal, dulce): tarjetas grandes en grilla.

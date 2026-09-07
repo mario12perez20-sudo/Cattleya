@@ -267,6 +267,19 @@
   margin-right: 0.4rem;
 }
 
+/* Grilla compacta para subgrupos de bebidas (Café, Sodas): 2 tarjetas por
+   fila en mobile/tablet; en desktop se expande como el grid normal. */
+.product-grid--compact {
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+@media (min-width: 700px) {
+  .product-grid--compact {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+}
+
 /* --- Sección de menú tipo "carta" (brunch) --- */
 .menu-list {
   display: grid;
