@@ -406,3 +406,64 @@
   font-size: 1.6rem;
 }
 .whatsapp-float:hover { transform: scale(1.06); }
+
+
+/* --- Reservas (brunch) --- */
+.reservation-form {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--color-cream-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.reservation-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .reservation-form__grid { grid-template-columns: 1fr; }
+}
+
+.reservation-form .form-field label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-wine);
+  margin-bottom: 0.35rem;
+}
+
+.reservation-form .form-field input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  color: var(--color-text);
+}
+
+.reservation-form .form-field input:focus {
+  outline: none;
+  border-color: var(--color-magenta);
+  box-shadow: 0 0 0 3px rgba(209, 52, 123, 0.15);
+}
+
+.reservation-form__submit {
+  width: 100%;
+  max-width: 320px;
+}
+
+.reservation-form__status {
+  margin: var(--space-sm) 0 0;
+  font-size: var(--fs-small);
+  color: var(--color-danger);
+}

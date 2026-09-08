@@ -199,7 +199,7 @@ const brunchCatalog = {
         { id: "beb-soda-maracuya", name: "Soda italiana maracuyá", subgroup: "Sodas", description: "Burbujeante y tropical, un golpe de frescura.", price: 12000, images: ["assets/img/brunch/web/soda-maracuya.jpg"], active: true, order: 14, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
         { id: "beb-soda-lulo", name: "Soda italiana lulo", subgroup: "Sodas", description: "Ácida, frutal y refrescante hasta el fondo.", price: 12000, images: ["assets/img/brunch/web/soda-lulo.jpg"], active: true, order: 15, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
         { id: "beb-soda-granadina", name: "Soda italiana granadina", subgroup: "Sodas", description: "Dulce, colorida y perfecta para el calor.", price: 12000, images: [], active: true, order: 16, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
-        { id: "beb-agua-con-gas", name: "Botella de agua", subgroup: "Agua", description: "Con gas o sin gas.", price: 3500, images: [], active: true, order: 22, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
+        { id: "beb-agua-con-gas", name: "Botella de agua", subgroup: "Agua", description: "Con gas o sin gas.", price: 3500, images: ["assets/img/brunch/icons/agua.png"], active: true, order: 22, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
         { id: "beb-agua-sin-gas", name: "Botella sin gas", subgroup: "Agua", price: 3500, images: [], active: false, order: 23, promo: { active: false, label: "", discountType: "percent", discountValue: 0 } },
       ],
     },

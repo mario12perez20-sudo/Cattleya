@@ -30,3 +30,9 @@ function buildGeneralInquiryLink(phoneNumber) {
   const message = "Hola Cattleya! 🌸 Quisiera más información.";
   return buildWhatsappLink(phoneNumber, message);
 }
+
+function buildReservationLink(phoneNumber, reservation) {
+  const { name, dateLabel, timeLabel, people } = reservation;
+  const message = `Hola Cattleya! 🌸 Quiero reservar mesa para el brunch:\n*Nombre:* ${name}\n*Fecha:* ${dateLabel}\n*Hora:* ${timeLabel}\n*Personas:* ${people}\n¿Está disponible?`;
+  return buildWhatsappLink(phoneNumber, message);
+}
