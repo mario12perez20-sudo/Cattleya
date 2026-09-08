@@ -3,3 +3,6 @@ node_modules/
 seed/serviceAccountKey.json
 .DS_Store
 Thumbs.db
+
+# archivos de control de calidad temporales (Claude)
+IMG/**/.qa_*
