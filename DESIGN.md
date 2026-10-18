@@ -28,7 +28,7 @@ El logo (`assets/logo/`) es el oficial; no redibujarlo.
 - Fotos dentro de tarjetas con el nombre en el título: `alt=""`.
 - Texto de Firestore que entre al HTML pasa por `escapeHTML()` (`js/main.js`).
 - Respetar `prefers-reduced-motion`.
-- Pendiente de decisión: `--color-text-muted` (`#8A8371`) da 3.6:1 en descripciones.
+- `--color-text-muted` es `#736C5C` (4.7:1 o más sobre crema); no volver al `#8A8371` (3.6:1).
 
 ## Estructura y estilo
 

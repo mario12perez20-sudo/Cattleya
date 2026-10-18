@@ -43,5 +43,5 @@ Convenciones que salieron de la auditoría de 2026-10-18; mantenerlas al tocar H
 - Objetivos táctiles de al menos 44px (botones, chips, enlaces de menú). El foco visible es el `:focus-visible` global de `css/base.css`.
 - Magenta (`--color-magenta`) no sirve para texto pequeño sobre crema (4.43:1); usar `--color-magenta-dark`. Botones de WhatsApp: fondo `--color-whatsapp` (#128040) con texto blanco (5:1); no usar el #25D366 con blanco (1.98:1).
 - Orden de encabezados en la carta: h2 sección > h3 subgrupo > h4 ítem.
-- Pendiente por decidir: `--color-text-muted` (#8A8371) da 3.6:1 en las descripciones.
+- `--color-text-muted` ahora es #736C5C (4.7:1 o más sobre crema); no volver al #8A8371.
 - `npm run push` hace `git add -A`: si hay archivos sueltos (`.psd`, cambios de `seed/`), hacer commit selectivo y `git push` a mano, y actualizar los `?v=` de los HTML a mano.
