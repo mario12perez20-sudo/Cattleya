@@ -42,3 +42,7 @@
   font-weight: 600;
   color: var(--color-magenta-dark);
 }
+
+@media (max-width: 760px) {
+  .feature-card img { height: 200px; }
+}

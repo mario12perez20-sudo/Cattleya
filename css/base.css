@@ -67,7 +67,7 @@ button {
 }
 
 .section {
-  padding: var(--space-xl) 0;
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
 }
 
 .section-title {
