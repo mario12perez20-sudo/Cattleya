@@ -6,3 +6,9 @@ Thumbs.db
 
 # archivos de control de calidad temporales (Claude)
 IMG/**/.qa_*
+
+# Impeccable (plugin local: incluye binario)
+.claude/
+
+# Archivos de diseno (fuente, no van al repo)
+*.psd
