@@ -128,12 +128,13 @@ button {
   color: var(--color-white);
 }
 
-/* Texto vino sobre el verde de WhatsApp: el blanco daba solo 1.98:1. */
+/* Verde WhatsApp profundo: con texto blanco da 5:1 (el #25D366 original daba 1.98:1). */
 .btn-whatsapp {
-  background: #25D366;
-  color: var(--color-wine);
+  background: var(--color-whatsapp);
+  color: var(--color-white);
 }
 .btn-whatsapp:hover {
+  background: var(--color-whatsapp-dark);
   box-shadow: var(--shadow-card-hover);
 }
 

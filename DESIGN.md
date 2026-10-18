@@ -23,7 +23,7 @@ El logo (`assets/logo/`) es el oficial; no redibujarlo.
 
 - Contraste mínimo 4.5:1 para texto normal y 3:1 para texto grande y elementos de interfaz.
 - `--color-magenta` sobre crema da 4.43:1: no usarlo para texto pequeño; usar `--color-magenta-dark`.
-- Texto sobre el verde de WhatsApp (`#25D366`): vino, nunca blanco.
+- Botones de WhatsApp: fondo `--color-whatsapp` (`#128040`) con texto blanco (5:1). El `#25D366` original no admite texto blanco (1.98:1).
 - Objetivos táctiles de al menos 44px; foco visible con el `:focus-visible` global (`css/base.css`).
 - Fotos dentro de tarjetas con el nombre en el título: `alt=""`.
 - Texto de Firestore que entre al HTML pasa por `escapeHTML()` (`js/main.js`).
