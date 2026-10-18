@@ -10,29 +10,30 @@
   <link rel="shortcut icon" href="assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
   <link rel="stylesheet" href="css/variables.css?v=7fb482e8">
-  <link rel="stylesheet" href="css/base.css?v=e21d2428">
-  <link rel="stylesheet" href="css/components.css?v=55bd5d2f">
+  <link rel="stylesheet" href="css/base.css?v=e82c24c3">
+  <link rel="stylesheet" href="css/components.css?v=1bba909f">
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="brand">
         <img src="assets/logo/cattleya-logo-color.png" alt="Cattleya" class="brand-logo">
       </a>
-      <nav class="main-nav">
+      <nav class="main-nav" id="main-nav" aria-label="Principal">
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="plantas.html" class="is-active">Plantas &amp; Orquídeas</a></li>
+          <li><a href="plantas.html" class="is-active" aria-current="page">Plantas &amp; Orquídeas</a></li>
           <li><a href="brunch.html">Brunch</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-controls="main-nav" aria-expanded="false">☰</button>
     </div>
   </header>
 
-  <main>
+  <main id="contenido">
     <section class="hero" style="padding-bottom: 1rem;">
       <div class="container text-center">
         <span class="hero__eyebrow">Nuestro catálogo</span>
@@ -40,7 +41,7 @@
         <p style="max-width: 620px; margin: 0 auto var(--space-md);">
           Elige tu favorita y escríbenos por WhatsApp para confirmar disponibilidad y coordinar la entrega.
         </p>
-        <a id="plantas-wa-general" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <a id="plantas-wa-general" target="_blank" rel="noopener" class="btn btn-whatsapp">
           Escribir por WhatsApp
         </a>
       </div>
@@ -48,8 +49,8 @@
 
     <section class="section" style="padding-top: var(--space-md);">
       <div class="container">
-        <div id="plantas-filters" class="category-filters"></div>
-        <div id="plantas-grid" class="product-grid"></div>
+        <div id="plantas-filters" class="category-filters" role="group" aria-label="Filtrar por categoría"></div>
+        <div id="plantas-grid" class="product-grid" aria-live="polite"></div>
       </div>
     </section>
   </main>
@@ -81,13 +82,13 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=06566f06"></script>
+  <script src="js/main.js?v=9b263a69"></script>
   <script src="js/firebase-config.js?v=a4db50b1"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-init.js?v=1b138ebe"></script>
   <script src="js/whatsapp.js?v=884c860d"></script>
-  <script src="js/catalog-plantas.js?v=b70cb6b5"></script>
+  <script src="js/catalog-plantas.js?v=17219a8a"></script>
 </body>
 </html>

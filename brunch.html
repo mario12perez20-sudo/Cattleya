@@ -10,29 +10,30 @@
   <link rel="shortcut icon" href="assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
   <link rel="stylesheet" href="css/variables.css?v=7fb482e8">
-  <link rel="stylesheet" href="css/base.css?v=e21d2428">
-  <link rel="stylesheet" href="css/components.css?v=55bd5d2f">
+  <link rel="stylesheet" href="css/base.css?v=e82c24c3">
+  <link rel="stylesheet" href="css/components.css?v=1bba909f">
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="brand">
         <img src="assets/logo/cattleya-logo-color.png" alt="Cattleya" class="brand-logo">
       </a>
-      <nav class="main-nav">
+      <nav class="main-nav" id="main-nav" aria-label="Principal">
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="plantas.html">Plantas &amp; Orquídeas</a></li>
-          <li><a href="brunch.html" class="is-active">Brunch</a></li>
+          <li><a href="brunch.html" class="is-active" aria-current="page">Brunch</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-controls="main-nav" aria-expanded="false">☰</button>
     </div>
   </header>
 
-  <main>
+  <main id="contenido">
     <section class="hero" style="padding-bottom: 1rem;">
       <div class="container text-center">
         <span class="hero__eyebrow">Nuestra carta</span>
@@ -44,7 +45,7 @@
     </section>
 
     <section class="section" style="padding-top: var(--space-md);">
-      <div class="container" id="brunch-menu">
+      <div class="container" id="brunch-menu" aria-live="polite">
         <!-- catalog-brunch.js pinta aquí las secciones -->
       </div>
     </section>
@@ -111,14 +112,14 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=06566f06"></script>
+  <script src="js/main.js?v=9b263a69"></script>
   <script src="js/firebase-config.js?v=a4db50b1"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-init.js?v=1b138ebe"></script>
   <script src="js/whatsapp.js?v=884c860d"></script>
-  <script src="js/catalog-brunch.js?v=c144ad14"></script>
+  <script src="js/catalog-brunch.js?v=f0d421e3"></script>
   <script src="js/reservas.js?v=f11cea6f"></script>
 </body>
 </html>

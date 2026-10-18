@@ -48,6 +48,7 @@
 
     const allChip = document.createElement("button");
     allChip.className = "category-chip is-active";
+    allChip.setAttribute("aria-pressed", "true");
     allChip.textContent = "Todas";
     allChip.dataset.sectionId = "all";
     filtersEl.appendChild(allChip);
@@ -55,6 +56,7 @@
     sections.forEach((section) => {
       const chip = document.createElement("button");
       chip.className = "category-chip";
+      chip.setAttribute("aria-pressed", "false");
       chip.textContent = section.name;
       chip.dataset.sectionId = section.id;
       filtersEl.appendChild(chip);
@@ -63,8 +65,12 @@
     filtersEl.addEventListener("click", (e) => {
       const btn = e.target.closest(".category-chip");
       if (!btn) return;
-      filtersEl.querySelectorAll(".category-chip").forEach((c) => c.classList.remove("is-active"));
+      filtersEl.querySelectorAll(".category-chip").forEach((c) => {
+        c.classList.remove("is-active");
+        c.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("is-active");
+      btn.setAttribute("aria-pressed", "true");
       activeSectionId = btn.dataset.sectionId;
       renderGrid();
     });
@@ -108,7 +114,7 @@
         const isAgotado = item.stock === "agotado";
         const badges = [];
         if (item.promo && item.promo.active) {
-          badges.push(`<span class="badge badge-promo">${item.promo.label || "Promo"}</span>`);
+          badges.push(`<span class="badge badge-promo">${escapeHTML(item.promo.label || "Promo")}</span>`);
         }
         badges.push(
           isAgotado
@@ -116,20 +122,22 @@
             : `<span class="badge badge-disponible">Disponible</span>`
         );
 
-        const waLink = whatsappNumber ? buildProductInquiryLink(whatsappNumber, item) : "#";
+        const waAttrs = whatsappNumber
+          ? `href="${buildProductInquiryLink(whatsappNumber, item)}" target="_blank" rel="noopener"`
+          : `role="link" aria-disabled="true"`;
 
         return `
           <article class="product-card">
             <div class="product-card__media">
               <div class="product-card__badges">${badges.join("")}</div>
-              <img src="${img}" alt="${item.name}" loading="lazy" onerror="this.src='${FALLBACK_IMG}'">
+              <img src="${img}" alt="" loading="lazy" onerror="this.src='${FALLBACK_IMG}'">
             </div>
             <div class="product-card__body">
-              <h3 class="product-card__title">${item.name}</h3>
-              ${item.description ? `<p class="product-card__desc">${item.description}</p>` : ""}
+              <h3 class="product-card__title">${escapeHTML(item.name)}</h3>
+              ${item.description ? `<p class="product-card__desc">${escapeHTML(item.description)}</p>` : ""}
               <div class="product-card__footer">
                 ${priceMarkup(item)}
-                <a class="btn btn-whatsapp btn-sm" href="${waLink}" target="_blank" rel="noopener">
+                <a class="btn btn-whatsapp btn-sm" ${waAttrs} aria-label="Pedir ${escapeHTML(item.name)} por WhatsApp">
                   Pedir
                 </a>
               </div>
@@ -142,7 +150,7 @@
 
   async function init() {
     if (!grid) return;
-    grid.innerHTML = `<p class="state-message">Cargando plantas…</p>`;
+    grid.innerHTML = `<p class="state-message" role="status">Cargando plantas…</p>`;
 
     try {
       const [loadedSections] = await Promise.all([loadCatalog(), loadSettings()]);

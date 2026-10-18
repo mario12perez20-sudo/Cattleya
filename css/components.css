@@ -64,7 +64,7 @@
 
 .main-nav a:hover,
 .main-nav a.is-active {
-  color: var(--color-magenta);
+  color: var(--color-magenta-dark);
   border-color: var(--color-magenta);
 }
 
@@ -74,6 +74,8 @@
   border: none;
   font-size: 1.6rem;
   color: var(--color-wine);
+  min-width: 44px;
+  min-height: 44px;
 }
 
 @media (max-width: 768px) {
@@ -92,7 +94,11 @@
     flex-direction: column;
     align-items: flex-start;
     padding: var(--space-sm);
-    gap: var(--space-sm);
+    gap: var(--space-xs);
+  }
+  .main-nav a {
+    display: inline-block;
+    padding: 0.7rem 0.1rem;
   }
 }
 
@@ -158,6 +164,7 @@
 }
 
 .category-chip {
+  min-height: 44px;
   padding: 0.55rem 1.25rem;
   border-radius: 999px;
   border: 1.5px solid var(--color-border);
@@ -321,7 +328,7 @@
 
 .menu-item__price {
   font-weight: 700;
-  color: var(--color-magenta);
+  color: var(--color-magenta-dark);
   white-space: nowrap;
   text-align: right;
 }
@@ -341,7 +348,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-magenta);
+  color: var(--color-magenta-dark);
   margin: var(--space-md) 0 var(--space-xs);
 }
 
@@ -357,8 +364,13 @@
   margin-top: var(--space-xl);
 }
 
-.site-footer a { color: var(--color-cream); }
-.site-footer a:hover { color: var(--color-magenta); }
+.site-footer a {
+  color: var(--color-cream);
+  display: inline-block;
+  padding: 0.35rem 0;
+}
+.site-footer a:hover { text-decoration: underline; }
+.site-footer :focus-visible { outline-color: var(--color-cream); }
 
 .footer-grid {
   display: grid;
@@ -402,7 +414,7 @@
   justify-content: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   z-index: 200;
-  color: var(--color-white);
+  color: var(--color-wine);
   font-size: 1.6rem;
 }
 .whatsapp-float:hover { transform: scale(1.06); }
@@ -443,7 +455,7 @@
 .reservation-form .form-field input {
   width: 100%;
   padding: 0.7rem 0.9rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-wine-soft);
   border-radius: var(--radius-sm);
   background: var(--color-white);
   font-family: inherit;
@@ -452,9 +464,7 @@
 }
 
 .reservation-form .form-field input:focus {
-  outline: none;
-  border-color: var(--color-magenta);
-  box-shadow: 0 0 0 3px rgba(209, 52, 123, 0.15);
+  border-color: var(--color-magenta-dark);
 }
 
 .reservation-form__submit {

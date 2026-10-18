@@ -25,18 +25,19 @@
     return formatCOP(item.price);
   }
 
-  function renderMenuItem(item) {
+  // headingTag: h4 dentro de un subgrupo (h2 > h3 > h4); h3 si cuelga directo de la sección (h2 > h3).
+  function renderMenuItem(item, headingTag = "h3") {
     const img = item.images && item.images[0];
     return `
       <div class="menu-item">
         ${
           img
-            ? `<div class="menu-item__thumb"><img src="${img}" alt="${item.name}" loading="lazy"></div>`
+            ? `<div class="menu-item__thumb"><img src="${img}" alt="" loading="lazy"></div>`
             : `<div></div>`
         }
         <div>
-          <h4 class="menu-item__name">${item.name}</h4>
-          ${item.description ? `<p class="menu-item__desc">${item.description}</p>` : ""}
+          <${headingTag} class="menu-item__name">${escapeHTML(item.name)}</${headingTag}>
+          ${item.description ? `<p class="menu-item__desc">${escapeHTML(item.description)}</p>` : ""}
         </div>
         <div class="menu-item__price">${priceMarkup(item)}</div>
       </div>
@@ -46,16 +47,16 @@
   // Tarjeta grande (imagen arriba, info abajo) — para secciones con fotos,
   // como Para el hambre / Para el antojo. Reutiliza el mismo componente
   // visual que el catálogo de plantas (.product-card).
-  function renderProductCard(item) {
+  function renderProductCard(item, headingTag = "h3") {
     const img = item.images && item.images[0];
     return `
       <article class="product-card">
         <div class="product-card__media">
-          ${img ? `<img src="${img}" alt="${item.name}" loading="lazy">` : ""}
+          ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
         </div>
         <div class="product-card__body">
-          <h3 class="product-card__title">${item.name}</h3>
-          ${item.description ? `<p class="product-card__desc">${item.description}</p>` : ""}
+          <${headingTag} class="product-card__title">${escapeHTML(item.name)}</${headingTag}>
+          ${item.description ? `<p class="product-card__desc">${escapeHTML(item.description)}</p>` : ""}
           <div class="product-card__footer">
             <span class="product-card__price">${priceMarkup(item)}</span>
           </div>
@@ -100,27 +101,27 @@
       body = Object.entries(groups)
         .map(([groupName, groupItems]) => {
           const list = CARD_SUBGROUPS.has(groupName)
-            ? `<div class="product-grid product-grid--compact">${groupItems.map(renderProductCard).join("")}</div>`
-            : `<div class="menu-list">${groupItems.map(renderMenuItem).join("")}</div>`;
+            ? `<div class="product-grid product-grid--compact">${groupItems.map((i) => renderProductCard(i, "h4")).join("")}</div>`
+            : `<div class="menu-list">${groupItems.map((i) => renderMenuItem(i, "h4")).join("")}</div>`;
           return `
-            <h4 class="menu-subgroup-title">${groupName}</h4>
+            <h3 class="menu-subgroup-title">${escapeHTML(groupName)}</h3>
             ${list}
           `;
         })
         .join("");
     } else if (hasPhotos) {
       // Platos con foto (sal, dulce): tarjetas grandes en grilla.
-      body = `<div class="product-grid">${items.map(renderProductCard).join("")}</div>`;
+      body = `<div class="product-grid">${items.map((i) => renderProductCard(i)).join("")}</div>`;
     } else {
       // Sin foto (adiciones): lista compacta.
-      body = `<div class="menu-list">${items.map(renderMenuItem).join("")}</div>`;
+      body = `<div class="menu-list">${items.map((i) => renderMenuItem(i)).join("")}</div>`;
     }
 
     return `
       <section class="menu-section" id="cat-${section.id}">
         <div class="section-title">
-          ${section.subtitle ? `<span class="eyebrow">${section.subtitle}</span>` : ""}
-          <h2>${section.name}</h2>
+          ${section.subtitle ? `<span class="eyebrow">${escapeHTML(section.subtitle)}</span>` : ""}
+          <h2>${escapeHTML(section.name)}</h2>
         </div>
         ${body}
       </section>
@@ -129,7 +130,7 @@
 
   async function init() {
     if (!container) return;
-    container.innerHTML = `<p class="state-message">Cargando la carta…</p>`;
+    container.innerHTML = `<p class="state-message" role="status">Cargando la carta…</p>`;
 
     try {
       const snap = await window.CATTLEYA_DB.collection("catalog").doc("brunch").get();

@@ -128,17 +128,51 @@ button {
   color: var(--color-white);
 }
 
+/* Texto vino sobre el verde de WhatsApp: el blanco daba solo 1.98:1. */
 .btn-whatsapp {
   background: #25D366;
-  color: var(--color-white);
+  color: var(--color-wine);
 }
 .btn-whatsapp:hover {
-  background: #1DA851;
+  box-shadow: var(--shadow-card-hover);
 }
 
 .btn-sm {
   padding: 0.5rem 1.1rem;
   font-size: var(--fs-small);
+  min-height: 44px;
+}
+
+/* --- Foco visible con teclado --- */
+:focus-visible {
+  outline: 3px solid var(--color-wine);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-sm);
+  top: -4rem;
+  z-index: 300;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-wine);
+  color: var(--color-cream);
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: var(--space-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .btn:hover, .product-card:hover, .feature-card:hover, .whatsapp-float:hover {
+    transform: none;
+  }
 }
 
 /* --- Badges --- */
