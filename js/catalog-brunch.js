@@ -52,7 +52,7 @@
     return `
       <article class="product-card">
         <div class="product-card__media">
-          ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
+          <img src="${img || "assets/img/orquidea-tile.svg"}" alt="" loading="lazy">
         </div>
         <div class="product-card__body">
           <${headingTag} class="product-card__title">${escapeHTML(item.name)}</${headingTag}>
@@ -128,6 +128,10 @@
     `;
   }
 
+  // Etiquetas cortas para la barra de secciones: los nombres de Firestore son
+  // frases poéticas ("de un brunch que enamora"), no sirven como chip.
+  const JUMP_LABELS = { "brunch-sal": "Salado", "brunch-dulce": "Dulce", "brunch-bebidas": "Bebidas", "brunch-adiciones": "Adiciones" };
+
   async function init() {
     if (!container) return;
     container.innerHTML = `<p class="state-message" role="status">Cargando la carta…</p>`;
@@ -144,8 +148,9 @@
         .filter((s) => s.active !== false)
         .sort((a, b) => (a.order || 0) - (b.order || 0));
 
-      const html = sections.map(renderSection).join("");
-      container.innerHTML = html || `<p class="state-message">La carta estará disponible pronto.</p>`;
+      const html = sections.map(renderSection).filter(Boolean).join("");
+      const jump = sections.length > 1 ? `<nav class="menu-jump" aria-label="Secciones de la carta">${sections.map((s) => `<a class="category-chip" href="#cat-${escapeHTML(s.id)}">${escapeHTML(JUMP_LABELS[s.id] || s.name)}</a>`).join("")}</nav>` : "";
+      container.innerHTML = html ? jump + html : `<p class="state-message">La carta estará disponible pronto.</p>`;
     } catch (err) {
       console.error("Error cargando la carta de brunch:", err);
       container.innerHTML = `<p class="state-message">No pudimos cargar la carta. Intenta de nuevo en un momento.</p>`;

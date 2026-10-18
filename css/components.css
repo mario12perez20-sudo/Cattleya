@@ -105,7 +105,7 @@
 /* --- Hero --- */
 .hero {
   position: relative;
-  padding: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
   overflow: hidden;
 }
 
@@ -153,6 +153,12 @@
   overflow: hidden;
   box-shadow: var(--shadow-card-hover);
 }
+.hero__image img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 10%;
+}
 
 /* --- Filtros de categoría --- */
 .category-filters {
@@ -189,7 +195,7 @@
 /* --- Grid de productos --- */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-md);
 }
 
@@ -481,4 +487,40 @@
   margin: var(--space-sm) 0 0;
   font-size: var(--fs-small);
   color: var(--color-danger);
+}
+
+/* --- Navegación de secciones de la carta (brunch) --- */
+.menu-jump {
+  position: sticky;
+  top: 66px;
+  z-index: 50;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  padding: 0.6rem 0;
+  margin-bottom: var(--space-md);
+  background: rgba(254, 249, 230, 0.92);
+  backdrop-filter: blur(6px);
+}
+.menu-jump .category-chip { display: inline-flex; align-items: center; white-space: nowrap; }
+.menu-section { scroll-margin-top: 130px; }
+#reservar { scroll-margin-top: 70px; }
+
+/* Móvil: chips en una sola fila con scroll horizontal (en vez de apilarse
+   desparejos) y botón flotante de WhatsApp más discreto. */
+@media (max-width: 560px) {
+  .menu-jump,
+  .category-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-right: var(--space-sm);
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+  }
+  .menu-jump .category-chip,
+  .category-filters .category-chip { flex: 0 0 auto; scroll-snap-align: start; }
+  .whatsapp-float { width: 52px; height: 52px; right: 1rem; bottom: 1rem; }
+  main { padding-bottom: 4rem; }
 }
