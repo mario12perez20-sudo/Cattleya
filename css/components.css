@@ -177,7 +177,7 @@
 
 .category-chip:hover {
   border-color: var(--color-magenta);
-  color: var(--color-magenta);
+  color: var(--color-magenta-dark);
 }
 
 .category-chip.is-active {
@@ -262,7 +262,7 @@
 
 .product-card__price {
   font-weight: 700;
-  color: var(--color-magenta);
+  color: var(--color-magenta-dark);
   font-size: var(--fs-price);
 }
 
