@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://mario12perez20-sudo.github.io/Cattleya/sitemap.xml
