@@ -12,3 +12,6 @@ IMG/**/.qa_*
 
 # Archivos de diseno (fuente, no van al repo)
 *.psd
+
+# Originales sin optimizar (el sitio usa assets/img/brunch/web/)
+assets/img/brunch/*.png
