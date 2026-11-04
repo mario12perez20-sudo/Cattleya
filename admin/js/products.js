@@ -205,7 +205,12 @@ async function handleProductSubmit(e) {
     newSection.items.push({ id, ...payload });
   }
 
-  await window.CatalogStore.saveCatalog(catalogId);
+  try {
+    await window.CatalogStore.saveCatalog(catalogId);
+  } catch (err) {
+    alert(err.message);
+    return;
+  }
   closeProductModal();
   renderProductsTable();
 }
@@ -219,7 +224,12 @@ async function duplicateItem(sectionId, itemId) {
   const newId = window.CatalogStore.uniqueItemId(catalogId, `${found.item.id}-copia`);
   found.section.items.push({ ...found.item, id: newId, name: `${found.item.name} (copia)`, active: false });
 
-  await window.CatalogStore.saveCatalog(catalogId);
+  try {
+    await window.CatalogStore.saveCatalog(catalogId);
+  } catch (err) {
+    alert(err.message);
+    return;
+  }
   renderProductsTable();
 }
 
@@ -260,14 +270,24 @@ function initProductsView() {
 
     if (e.target.closest(".prod-toggle-btn")) {
       found.item.active = found.item.active === false;
-      await window.CatalogStore.saveCatalog(catalogId);
+      try {
+        await window.CatalogStore.saveCatalog(catalogId);
+      } catch (err) {
+        alert(err.message);
+        return;
+      }
       renderProductsTable();
     }
 
     if (e.target.closest(".prod-delete-btn")) {
       if (confirm(`¿Eliminar "${found.item.name}"? Esta acción no se puede deshacer.`)) {
         found.section.items = found.section.items.filter((it) => it.id !== itemId);
-        await window.CatalogStore.saveCatalog(catalogId);
+        try {
+          await window.CatalogStore.saveCatalog(catalogId);
+        } catch (err) {
+          alert(err.message);
+          return;
+        }
         renderProductsTable();
       }
     }

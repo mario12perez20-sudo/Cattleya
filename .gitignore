@@ -15,3 +15,6 @@ IMG/**/.qa_*
 
 # Originales sin optimizar (el sitio usa assets/img/brunch/web/)
 assets/img/brunch/*.png
+
+# Referencia externa (no publicar)
+docs/REFERENCIA_BEERGARDEN.md

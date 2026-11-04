@@ -97,7 +97,12 @@ async function handleCategorySubmit(e) {
     data.sections.push({ id, ...payload, items: [] });
   }
 
-  await window.CatalogStore.saveCatalog(catalogId);
+  try {
+    await window.CatalogStore.saveCatalog(catalogId);
+  } catch (err) {
+    alert(err.message);
+    return;
+  }
   closeCategoryModal();
   renderCategoriesTable();
 }
@@ -125,7 +130,12 @@ function initCategoriesView() {
 
     if (e.target.closest(".cat-toggle-btn")) {
       section.active = section.active === false;
-      await window.CatalogStore.saveCatalog(catalogId);
+      try {
+        await window.CatalogStore.saveCatalog(catalogId);
+      } catch (err) {
+        alert(err.message);
+        return;
+      }
       renderCategoriesTable();
     }
 
@@ -134,7 +144,12 @@ function initCategoriesView() {
       const warning = itemCount ? ` Tiene ${itemCount} producto(s) adentro — también se eliminarán.` : "";
       if (confirm(`¿Eliminar la categoría "${section.name}"?${warning}`)) {
         data.sections = data.sections.filter((s) => s.id !== id);
-        await window.CatalogStore.saveCatalog(catalogId);
+        try {
+          await window.CatalogStore.saveCatalog(catalogId);
+        } catch (err) {
+          alert(err.message);
+          return;
+        }
         renderCategoriesTable();
       }
     }

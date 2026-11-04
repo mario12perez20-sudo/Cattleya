@@ -10,6 +10,8 @@
 
 window.CatalogStore = (function () {
   const cache = { plantas: null, brunch: null };
+  // updatedAt del servidor en el último loadCatalog, para detectar escrituras concurrentes
+  const _serverTime = {};
 
   function slugify(text) {
     return text
@@ -22,9 +24,11 @@ window.CatalogStore = (function () {
 
   async function loadCatalog(catalogId, force) {
     if (cache[catalogId] && !force) return cache[catalogId];
-    const snap = await window.CATTLEYA_DB.collection("catalog").doc(catalogId).get();
+    // Siempre leer del servidor en el admin, nunca de caché offline (Lección 4 Beer Garden)
+    const snap = await window.CATTLEYA_DB.collection("catalog").doc(catalogId).get({ source: "server" });
     cache[catalogId] = snap.exists ? snap.data() : { sections: [] };
     if (!cache[catalogId].sections) cache[catalogId].sections = [];
+    _serverTime[catalogId] = snap.exists ? (snap.data().updatedAt?.toMillis?.() || 0) : 0;
     return cache[catalogId];
   }
 
@@ -35,10 +39,28 @@ window.CatalogStore = (function () {
   async function saveCatalog(catalogId) {
     const data = cache[catalogId];
     if (!data) throw new Error(`No hay datos en memoria para el catálogo "${catalogId}"`);
-    await window.CATTLEYA_DB.collection("catalog").doc(catalogId).set({
+
+    const ref = window.CATTLEYA_DB.collection("catalog").doc(catalogId);
+
+    // Detectar escrituras concurrentes: re-leer del servidor y comparar timestamps (Lección 2 Beer Garden)
+    const serverSnap = await ref.get({ source: "server" });
+    if (serverSnap.exists) {
+      const serverTime = serverSnap.data().updatedAt?.toMillis?.() || 0;
+      const knownTime = _serverTime[catalogId] || 0;
+      if (serverTime > knownTime) {
+        throw new Error(
+          "Hay cambios más recientes en el servidor.\n" +
+          "Recargá la página para ver la versión actualizada antes de guardar."
+        );
+      }
+    }
+
+    await ref.set({
       ...data,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    // Actualizar timestamp conocido para que el próximo save en la misma sesión no falle
+    _serverTime[catalogId] = Date.now();
   }
 
   function uniqueSectionId(catalogId, baseSlug) {
