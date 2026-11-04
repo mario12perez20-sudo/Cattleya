@@ -35,6 +35,21 @@ const EXCLUDE = [
   "Productos",
   "IMG",
   ".DS_Store",
+  ".claude",
+  ".impeccable",
+  "Claude outputs",
+  "CLAUDE.md",
+  "DESIGN.md",
+  "README.md",
+  ".gitattributes",
+  "fotos_productos.psd",
+  "iconos.psd",
+  "mesas.psd",
+  "Contrato_Cattleya_SitioWeb.docx",
+  "CÓDIGOS DE RESPALDO - CONTRASEÑA DE GMAIL.txt",
+  "WhatsApp Image 2026-06-17 at 2.22.13 PM.jpeg",
+  "WhatsApp Image 2026-06-17 at 2.22.14 PM.jpeg",
+  "WhatsApp Image 2026-06-17 at 2.22.15 PM.jpeg",
 ];
 
 function checkEnv() {
