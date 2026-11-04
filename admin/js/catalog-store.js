@@ -59,8 +59,12 @@ window.CatalogStore = (function () {
       ...data,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    // Actualizar timestamp conocido para que el próximo save en la misma sesión no falle
-    _serverTime[catalogId] = Date.now();
+    // Re-leer para sincronizar _serverTime con el timestamp real del servidor
+    // (evita falsos positivos de "cambios más recientes" por diferencia de relojes cliente/servidor)
+    const freshSnap = await ref.get({ source: "server" });
+    _serverTime[catalogId] = freshSnap.exists ? (freshSnap.data().updatedAt?.toMillis?.() || 0) : 0;
+    cache[catalogId] = freshSnap.exists ? freshSnap.data() : { sections: [] };
+    if (!cache[catalogId].sections) cache[catalogId].sections = [];
   }
 
   function uniqueSectionId(catalogId, baseSlug) {
