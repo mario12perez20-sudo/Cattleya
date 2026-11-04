@@ -65,23 +65,33 @@ function listLocalEntries(dir) {
   return fs.readdirSync(dir).filter((name) => !EXCLUDE.includes(name));
 }
 
-async function uploadDir(client, localDir, remoteDir) {
-  await client.ensureDir(remoteDir);
-  await client.clearWorkingDir();
-
-  const entries = fs.readdirSync(localDir, { withFileTypes: true });
-  for (const entry of entries) {
+// Recorre localDir y devuelve todos los archivos (no directorios) excluyendo EXCLUDE.
+function walkFiles(localDir) {
+  const result = [];
+  for (const entry of fs.readdirSync(localDir, { withFileTypes: true })) {
     if (EXCLUDE.includes(entry.name)) continue;
-    const localPath = path.join(localDir, entry.name);
-
+    const fullPath = path.join(localDir, entry.name);
     if (entry.isDirectory()) {
-      await client.ensureDir(entry.name);
-      await uploadDir(client, localPath, path.posix.join(remoteDir, entry.name));
-      await client.cdup();
+      result.push(...walkFiles(fullPath));
     } else {
-      await client.uploadFrom(localPath, entry.name);
-      console.log(`  ↑ ${path.relative(ROOT_DIR, localPath)}`);
+      result.push(fullPath);
     }
+  }
+  return result;
+}
+
+// Sube todos los archivos usando paths absolutos en el servidor.
+// No usa cdup() ni paths relativos — evita pérdida de contexto FTP.
+async function uploadAll(client, localDir, remoteBaseDir) {
+  const files = walkFiles(localDir);
+  for (const localFile of files) {
+    const relPath = path.relative(localDir, localFile).replace(/\\/g, "/");
+    const remoteFile = `${remoteBaseDir}/${relPath}`;
+    const remoteDir = remoteFile.substring(0, remoteFile.lastIndexOf("/"));
+
+    await client.ensureDir(remoteDir);
+    await client.uploadFrom(localFile, path.basename(remoteFile));
+    console.log(`  ↑ ${relPath}`);
   }
 }
 
@@ -117,8 +127,7 @@ async function main() {
     });
 
     console.log(`→ Subiendo a ${process.env.FTP_REMOTE_DIR} …`);
-    await client.ensureDir(process.env.FTP_REMOTE_DIR);
-    await uploadDir(client, ROOT_DIR, process.env.FTP_REMOTE_DIR);
+    await uploadAll(client, ROOT_DIR, process.env.FTP_REMOTE_DIR);
 
     console.log("\n✅ Deploy completo.");
   } catch (err) {
