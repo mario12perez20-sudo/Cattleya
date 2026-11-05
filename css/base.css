@@ -15,10 +15,23 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--color-text);
-  background: var(--color-cream) url('../assets/img/orquidea-bg.svg') repeat;
-  background-size: 300px;
+  background: var(--color-cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo de orquídeas: mix-blend-mode:multiply hace que el blanco de la
+   imagen desaparezca sobre el crema, dejando solo las líneas magenta. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('../assets/img/orquidea-bg.png') repeat;
+  background-size: 280px;
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
 }
 
 img {
