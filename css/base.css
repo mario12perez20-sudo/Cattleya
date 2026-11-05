@@ -28,10 +28,10 @@ body::after {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 180px;
-  background: url('../assets/img/orquidea-bg.png') no-repeat center top / 150px auto;
+  width: 320px;
+  background: url('../assets/img/orquidea-bg.png') no-repeat center top / 280px auto;
   mix-blend-mode: multiply;
-  opacity: 0.18;
+  opacity: 0.09;
   pointer-events: none;
   z-index: 0;
 }

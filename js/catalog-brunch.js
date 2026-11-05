@@ -16,7 +16,7 @@
     const badges = allergens
       .map((id) => window.CATTLEYA_ALLERGENS[id])
       .filter(Boolean)
-      .map((a) => `<span class="allergen-badge">${a.icon}<span>${a.label}</span></span>`)
+      .map((a) => `<span class="allergen-badge" style="background:${a.bg};color:${a.color}">${a.icon}<span>${a.label}</span></span>`)
       .join("");
     return badges ? `<div class="allergen-list">${badges}</div>` : "";
   }

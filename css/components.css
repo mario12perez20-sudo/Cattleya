@@ -639,10 +639,8 @@
   gap: 0.28rem;
   font-size: 0.68rem;
   font-family: var(--font-body);
-  color: var(--color-magenta-dark);
   letter-spacing: 0.01em;
   line-height: 1;
-  background: rgba(155, 48, 96, 0.09);
   border-radius: 999px;
   padding: 0.22rem 0.55rem 0.22rem 0.4rem;
 }
