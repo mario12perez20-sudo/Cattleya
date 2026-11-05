@@ -15,7 +15,8 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--color-text);
-  background: var(--color-cream);
+  background: var(--color-cream) url('../assets/img/orquidea-bg.svg') repeat;
+  background-size: 300px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
