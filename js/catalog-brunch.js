@@ -11,6 +11,16 @@
 (function () {
   const container = document.getElementById("brunch-menu");
 
+  function renderAllergenBadges(allergens) {
+    if (!allergens || !allergens.length || !window.CATTLEYA_ALLERGENS) return "";
+    const badges = allergens
+      .map((id) => window.CATTLEYA_ALLERGENS[id])
+      .filter(Boolean)
+      .map((a) => `<span class="allergen-badge">${a.icon}<span>${a.label}</span></span>`)
+      .join("");
+    return badges ? `<div class="allergen-list">${badges}</div>` : "";
+  }
+
   function priceMarkup(item) {
     const promo = item.promo;
     if (promo && promo.active) {
@@ -38,6 +48,7 @@
         <div>
           <${headingTag} class="menu-item__name">${escapeHTML(item.name)}</${headingTag}>
           ${item.description ? `<p class="menu-item__desc">${escapeHTML(item.description)}</p>` : ""}
+          ${renderAllergenBadges(item.allergens)}
         </div>
         <div class="menu-item__price">${priceMarkup(item)}</div>
       </div>
@@ -57,6 +68,7 @@
         <div class="product-card__body">
           <${headingTag} class="product-card__title">${escapeHTML(item.name)}</${headingTag}>
           ${item.description ? `<p class="product-card__desc">${escapeHTML(item.description)}</p>` : ""}
+          ${renderAllergenBadges(item.allergens)}
           <div class="product-card__footer">
             <span class="product-card__price">${priceMarkup(item)}</span>
           </div>

@@ -97,6 +97,33 @@ function populateCategoryDropdowns(data) {
   }
 }
 
+function buildAllergenChecks() {
+  const container = document.getElementById("allergen-checks");
+  const fieldset = document.getElementById("allergen-fieldset");
+  if (!container || !window.CATTLEYA_ALLERGENS) return;
+  container.innerHTML = Object.entries(window.CATTLEYA_ALLERGENS)
+    .map(([id, a]) =>
+      `<label class="allergen-check-label" title="${a.label}">` +
+        `<input type="checkbox" class="allergen-cb" value="${id}">` +
+        a.icon +
+        `<span>${a.label}</span>` +
+      `</label>`
+    )
+    .join("");
+  if (fieldset) fieldset.style.display = "";
+}
+
+function setAllergenChecks(allergens) {
+  const checked = new Set(allergens || []);
+  document.querySelectorAll(".allergen-cb").forEach((cb) => {
+    cb.checked = checked.has(cb.value);
+  });
+}
+
+function getAllergenChecks() {
+  return Array.from(document.querySelectorAll(".allergen-cb:checked")).map((cb) => cb.value);
+}
+
 function imageRowHTML(value) {
   value = value || "";
   return `
@@ -143,12 +170,14 @@ function openProductModal(entry) {
     f.promoLabel.value = promo.label || "";
     f.promoDiscountType.value = promo.discountType || "percent";
     f.promoDiscountValue.value = promo.discountValue || 0;
+    setAllergenChecks(item.allergens);
   } else {
     f.stock.value = "disponible";
     f.active.checked = true;
     f.order.value = 0;
     setImageRows([]);
     f.promoDiscountType.value = "percent";
+    setAllergenChecks([]);
   }
   m.classList.remove("is-hidden");
 }
@@ -186,6 +215,7 @@ async function handleProductSubmit(e) {
       discountType: f.promoDiscountType.value,
       discountValue: Number(f.promoDiscountValue.value) || 0,
     },
+    allergens: getAllergenChecks(),
   };
 
   const editingSectionId = f.dataset.editingSectionId;
@@ -237,6 +267,7 @@ function initProductsView() {
   const body = prodTableBody();
   if (!body) return;
 
+  buildAllergenChecks();
   document.getElementById("add-product-btn")?.addEventListener("click", () => openProductModal(null));
   document.getElementById("product-modal-cancel")?.addEventListener("click", closeProductModal);
   document.getElementById("add-image-row-btn")?.addEventListener("click", () => {

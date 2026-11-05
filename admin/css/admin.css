@@ -347,6 +347,28 @@ fieldset.promo-fieldset legend {
   color: var(--color-magenta);
   padding: 0 0.4rem;
 }
+.allergen-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  padding: 0.25rem 0;
+}
+.allergen-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  user-select: none;
+}
+.allergen-check-label input[type="checkbox"] {
+  margin: 0;
+  accent-color: var(--color-magenta);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.allergen-check-label svg { opacity: 0.7; }
 
 .image-url-list {
   display: flex;
