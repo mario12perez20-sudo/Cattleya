@@ -1,8 +1,12 @@
 (function () {
-  var DELAY_MS = 2 * 60 * 1000;
+  var STORAGE_KEY = 'cattleya_ig_modal_dismissed';
+  var DELAY_MS = 4000;
 
   function buildModal() {
     if (document.getElementById('ig-modal-overlay')) return;
+
+    // Si el usuario ya cerró la modal alguna vez, no vuelve a aparecer.
+    try { if (localStorage.getItem(STORAGE_KEY)) return; } catch (e) {}
 
     var overlay = document.createElement('div');
     overlay.id = 'ig-modal-overlay';
@@ -35,6 +39,7 @@
 
     function closeModal() {
       overlay.classList.remove('is-open');
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
     }
 
     overlay.querySelector('.ig-modal__close').addEventListener('click', closeModal);
@@ -46,7 +51,6 @@
     });
 
     setTimeout(openModal, DELAY_MS);
-    setInterval(openModal, DELAY_MS * 2);
   }
 
   if (document.readyState === 'loading') {

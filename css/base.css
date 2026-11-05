@@ -33,7 +33,7 @@ body::after {
   mix-blend-mode: multiply;
   opacity: 0.09;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 body::before { left: 0; }
 body::after  { right: 0; transform: scaleX(-1); }
