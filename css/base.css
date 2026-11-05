@@ -20,19 +20,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Fondo de orquídeas: mix-blend-mode:multiply hace que el blanco de la
-   imagen desaparezca sobre el crema, dejando solo las líneas magenta. */
-body::before {
+/* Una orquídea en cada lateral, fija al scroll, muy sutil.
+   scaleX(-1) en ::after espeja la del lado derecho. */
+body::before,
+body::after {
   content: '';
   position: fixed;
-  inset: 0;
-  background: url('../assets/img/orquidea-bg.png') repeat;
-  background-size: 280px;
+  top: 0;
+  bottom: 0;
+  width: 180px;
+  background: url('../assets/img/orquidea-bg.png') no-repeat center top / 150px auto;
   mix-blend-mode: multiply;
-  opacity: 0.45;
+  opacity: 0.18;
   pointer-events: none;
   z-index: 0;
 }
+body::before { left: 0; }
+body::after  { right: 0; transform: scaleX(-1); }
 
 img {
   max-width: 100%;
