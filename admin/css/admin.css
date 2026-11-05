@@ -380,6 +380,28 @@ fieldset.promo-fieldset legend {
   gap: 0.4rem;
 }
 .image-url-list input { flex: 1; }
+.upload-image-btn {
+  background: var(--color-magenta);
+  color: #fff;
+  min-width: 36px;
+  font-size: 1rem;
+  line-height: 1;
+}
+.upload-image-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.upload-progress-bar {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: -0.25rem;
+}
+.upload-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-magenta);
+  transition: width 0.2s ease;
+  border-radius: 999px;
+}
 
 /* =========================================================
    Mobile — el admin se usa sobre todo desde el teléfono,

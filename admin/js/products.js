@@ -124,13 +124,60 @@ function getAllergenChecks() {
   return Array.from(document.querySelectorAll(".allergen-cb:checked")).map((cb) => cb.value);
 }
 
+// Comprime un File de imagen usando Canvas. Devuelve una Promise<Blob>.
+function compressImage(file, maxW, maxH, quality) {
+  maxW = maxW || 1200; maxH = maxH || 1200; quality = quality || 0.82;
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onerror = reject;
+      img.onload = function () {
+        var w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        canvas.toBlob(function (blob) {
+          blob ? resolve(blob) : reject(new Error("Canvas toBlob falló"));
+        }, "image/jpeg", quality);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Comprime y sube a Firebase Storage. Devuelve Promise<downloadURL>.
+function uploadImageFile(file, onProgress) {
+  var storage = window.CATTLEYA_STORAGE;
+  if (!storage) return Promise.reject(new Error("Firebase Storage no inicializado"));
+  var ext = "jpg";
+  var name = Date.now() + "-" + file.name.replace(/[^a-z0-9.\-_]/gi, "_").replace(/\.[^.]+$/, "") + "." + ext;
+  return compressImage(file).then(function (blob) {
+    var ref = storage.ref("cattleya/brunch/" + name);
+    var task = ref.put(blob, { contentType: "image/jpeg" });
+    return new Promise(function (resolve, reject) {
+      task.on("state_changed",
+        function (snap) { onProgress && onProgress(Math.round(snap.bytesTransferred / snap.totalBytes * 100)); },
+        reject,
+        function () { task.snapshot.ref.getDownloadURL().then(resolve, reject); }
+      );
+    });
+  });
+}
+
 function imageRowHTML(value) {
   value = value || "";
   return `
     <div class="image-url-row">
-      <input type="text" class="image-url-input" placeholder="https://…" value="${value}">
+      <input type="text" class="image-url-input" placeholder="URL o subí con ↑" value="${value}">
+      <button type="button" class="btn btn-sm upload-image-btn" title="Subir imagen desde tu dispositivo">↑</button>
       <button type="button" class="btn btn-sm remove-image-btn" style="background:var(--color-border);">✕</button>
     </div>
+    <div class="upload-progress-bar" style="display:none;"><div class="upload-progress-fill"></div></div>
   `;
 }
 
@@ -273,9 +320,49 @@ function initProductsView() {
   document.getElementById("add-image-row-btn")?.addEventListener("click", () => {
     document.getElementById("image-url-list").insertAdjacentHTML("beforeend", imageRowHTML());
   });
+  // Input de archivo oculto, compartido por todas las filas de imagen
+  var fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.style.display = "none";
+  document.body.appendChild(fileInput);
+
+  var _uploadTargetRow = null;
+  fileInput.addEventListener("change", function () {
+    var file = fileInput.files[0];
+    if (!file || !_uploadTargetRow) return;
+    var urlInput = _uploadTargetRow.querySelector(".image-url-input");
+    var bar = _uploadTargetRow.nextElementSibling; // .upload-progress-bar
+    var fill = bar ? bar.querySelector(".upload-progress-fill") : null;
+    var uploadBtn = _uploadTargetRow.querySelector(".upload-image-btn");
+    if (bar) bar.style.display = "block";
+    if (uploadBtn) { uploadBtn.disabled = true; uploadBtn.textContent = "…"; }
+    urlInput.value = "";
+    uploadImageFile(file, function (pct) {
+      if (fill) fill.style.width = pct + "%";
+    }).then(function (url) {
+      urlInput.value = url;
+      if (bar) bar.style.display = "none";
+      if (uploadBtn) { uploadBtn.disabled = false; uploadBtn.textContent = "↑"; }
+    }).catch(function (err) {
+      console.error("Upload error:", err);
+      alert("Error al subir la imagen: " + err.message);
+      if (bar) bar.style.display = "none";
+      if (uploadBtn) { uploadBtn.disabled = false; uploadBtn.textContent = "↑"; }
+    });
+    fileInput.value = "";
+  });
+
   document.getElementById("image-url-list")?.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-image-btn")) {
-      e.target.closest(".image-url-row").remove();
+      var row = e.target.closest(".image-url-row");
+      var bar = row.nextElementSibling;
+      if (bar && bar.classList.contains("upload-progress-bar")) bar.remove();
+      row.remove();
+    }
+    if (e.target.classList.contains("upload-image-btn")) {
+      _uploadTargetRow = e.target.closest(".image-url-row");
+      fileInput.click();
     }
   });
   prodForm()?.addEventListener("submit", handleProductSubmit);

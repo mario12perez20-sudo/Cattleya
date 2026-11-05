@@ -24,4 +24,7 @@
   window.CATTLEYA_APP = app;
   window.CATTLEYA_DB = firebase.firestore();
   window.CATTLEYA_AUTH = firebase.auth();
+  if (typeof firebase.storage === "function") {
+    window.CATTLEYA_STORAGE = firebase.storage();
+  }
 })();
